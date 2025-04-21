@@ -25,6 +25,22 @@ public class OrderManager {
         }
     }
 
+    public void deleteOrder(int orderId) {
+        String sql = "DELETE FROM orders WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, orderId);
+            int rows = stmt.executeUpdate();
+            if (rows > 0) {
+                System.out.println("Pedido eliminado correctamente.");
+            } else {
+                System.out.println("No se encontró el pedido.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al eliminar pedido:");
+            e.printStackTrace();
+        }
+    }
+
     public void getOrders() {
         String sql = "SELECT * FROM orders";
         try (Statement stmt = connection.createStatement()) {
@@ -37,6 +53,23 @@ public class OrderManager {
             }
         } catch (SQLException e) {
             System.out.println("Error al obtener pedidos:");
+            e.printStackTrace();
+        }
+    }
+
+    public void updateOrderStatus(int orderId, String newStatus) {
+        String sql = "UPDATE orders SET status = ? WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, newStatus);
+            stmt.setInt(2, orderId);
+            int rows = stmt.executeUpdate();
+            if (rows > 0) {
+                System.out.println("Estado del pedido actualizado.");
+            } else {
+                System.out.println("No se encontró el pedido.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al actualizar estado del pedido:");
             e.printStackTrace();
         }
     }

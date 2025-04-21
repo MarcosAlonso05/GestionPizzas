@@ -24,6 +24,22 @@ public class Authenticator {
         }
     }
 
+    public void deleteUser(int userId) {
+        String sql = "DELETE FROM users WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, userId);
+            int rows = stmt.executeUpdate();
+            if (rows > 0) {
+                System.out.println("Usuario eliminado correctamente.");
+            } else {
+                System.out.println("No se encontró el usuario.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al eliminar usuario:");
+            e.printStackTrace();
+        }
+    }
+
     public void getUsers() {
         String sql = "SELECT * FROM users";
         try (Statement stmt = connection.createStatement()) {
