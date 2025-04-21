@@ -36,17 +36,14 @@ public class DatabaseTest {
     @Test
     public void testUserOrderPaymentFlow() {
         try {
-            // Crear usuario
             userManager.insertUser("testuser", "password");
             userId = getLastId("users");
             Assertions.assertTrue(userId > 0);
 
-            // Crear pedido
             orderManager.insertOrder(userId, "Margarita", "pendiente");
             orderId = getLastId("orders");
             Assertions.assertTrue(orderId > 0);
 
-            // Crear pago
             paymentProcessor.insertPayment(orderId, 15.50, "efectivo");
             int paymentId = getLastId("payments");
             Assertions.assertTrue(paymentId > 0);
@@ -59,7 +56,6 @@ public class DatabaseTest {
     @AfterAll
     void cleanup() {
         try {
-            // Eliminar en orden inverso por FK
             deleteById("payments", "order_id", orderId);
             deleteById("orders", "id", orderId);
             deleteById("users", "id", userId);
