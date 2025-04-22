@@ -17,7 +17,7 @@ public class Main {
 
 
         while (true) {
-            System.out.println("\n=== MENÚ PRINCIPAL ===");
+            System.out.println("\n::: GESTOR PEDIDOS :::");
             System.out.println("1. Registrar usuario");
             System.out.println("2. Ver usuarios");
             System.out.println("3. Eliminar usuario");
