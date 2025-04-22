@@ -31,3 +31,5 @@ Utiliza una base de datos MySQL que puede ejecutarse fácilmente mediante Docker
 ```bash
 docker-compose up -d
 ```
+
+(El usuario administrador es root, contraseña: root)
